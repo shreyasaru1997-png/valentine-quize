@@ -2,20 +2,23 @@ body {
   margin: 0;
   height: 100vh;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, rgba(102,126,234,0.45), rgba(118,75,162,0.45)), url('images/9.jpeg') center/cover fixed no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: cover;
 }
 
 .quiz-card {
-  background: #fff;
+  background: rgba(255,255,255,0.85);
   border-radius: 16px;
   padding: 24px;
   width: 340px;
   text-align: center;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
 /* Cute micro-interactions and celebration/punishment effects */
