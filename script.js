@@ -13,7 +13,6 @@ const quiz = [
 
   {
     q: "What do I love most about you?",
-    image: "images/3.PNG",
     options: ["Your smile", "Your care", "Your anger 😛", "Everything 💖 ✅"],
     answer: 3
   },
