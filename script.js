@@ -32,7 +32,7 @@ const quiz = [
     q: "What was I thinking at this moment?",
     image: "images/5.jpeg",
     options: [
-      "She looks beautiful ❤️ ✅",
+      "She looks beautiful ❤️",
       "Let's take more photos",
       "I'm hungry 😋",
       "I don't want this moment to end 💕"
@@ -41,7 +41,7 @@ const quiz = [
   },
   {
     q: "What is my biggest weakness?",
-    options: ["Overthinking", "You ❤️ ✅", "Sleep", "Food 😋"],
+    options: ["Overthinking", "You ❤️", "Sleep", "Food 😋"],
     answer: 1
   },
 
@@ -51,7 +51,7 @@ const quiz = [
     options: ["Sringeri", "Hornadu", "Anegudda", "Kollur"],
     answer: 1
   },
-  
+
   {
     final: true
   }
