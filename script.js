@@ -59,10 +59,15 @@ const quiz = [
 
 const content = document.getElementById("content");
 const scoreDiv = document.getElementById("score");
+const progressDiv = document.getElementById("progress");
 const totalQuestions = quiz.filter(q => !q.final).length;
 
 function render() {
   scoreDiv.innerText = `Score: ${score}/${totalQuestions}`;
+  if (progressDiv) {
+    const progressPct = Math.round((current) / totalQuestions * 100);
+    progressDiv.innerHTML = `<div class="progress-text">Question ${Math.min(current+1,totalQuestions)}/${totalQuestions}</div><div class="progress-bar"><div class="progress-fill" style="width:${progressPct}%"></div></div>`;
+  }
   const q = quiz[current];
 
   if (q.final) {
@@ -105,6 +110,53 @@ function check(i, btn) {
     btn.disabled = true;
     // Do NOT reveal the correct answer or advance; user must pick the right one
   }
+}
+
+function celebrate() {
+  const confetti = document.createElement('div');
+  confetti.className = 'confetti-container';
+  for (let i = 0; i < 20; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.left = (Math.random() * 100) + '%';
+    el.style.backgroundColor = ['#FF6B6B','#FFD93D','#6BCB77','#4D96FF','#C77DFF'][Math.floor(Math.random()*5)];
+    confetti.appendChild(el);
+  }
+  content.appendChild(confetti);
+
+  for (let i = 0; i < 6; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.style.left = (20 + Math.random()*60) + '%';
+    h.innerText = '❤️';
+    content.appendChild(h);
+  }
+
+  const t = document.createElement('div');
+  t.className = 'celebration-text';
+  t.innerText = 'Correct! 🎉';
+  content.appendChild(t);
+
+  setTimeout(() => {
+    confetti.remove();
+    document.querySelectorAll('.heart').forEach(h => h.remove());
+    t.remove();
+  }, 1400);
+}
+
+function punish(btn) {
+  btn.classList.add('shake');
+  const card = document.querySelector('.quiz-card');
+  if (card) card.classList.add('flash-red');
+  const p = document.createElement('div');
+  p.className = 'punishment-text';
+  p.innerText = 'Try again! 😅';
+  content.appendChild(p);
+  setTimeout(() => {
+    btn.classList.remove('shake');
+    if (card) card.classList.remove('flash-red');
+    p.remove();
+  }, 700);
 }
 
 function no() {
