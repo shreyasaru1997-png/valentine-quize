@@ -4,24 +4,54 @@ let current = 0;
 // Image-based quiz using images/1.png, images/2.png, images/3.png
 // Update the `options` and `answer` fields to match your image contents.
 const quiz = [
+
+    {
+        q: "When did I first fall for you? 💕",
+        options: ["Feb 27", "March 4", "March 8", "I don’t remember 😛"],
+        answer: 2
+    },
+
   {
-    q: "Which memory is this?",
-    image: "images/1.PNG",
-    options: ["Memory 1", "Memory 2", "Memory 3", "Memory 4"],
+    q: "What do I love most about you?",
+    image: "images/3.PNG",
+    options: ["Your smile", "Your care", "Your anger 😛", "Everything 💖 ✅"],
+    answer: 3
+  },
+  {
+    q: "What made this moment special for us?",
+    image: "images/4.jpeg",
+    options: [
+      "Our first date after we moved into our new house",
+      "We had met after a long time",
+      "First date night with Kempesh",
+      "It was an unplanned but perfect day ❤️"
+    ],
+    answer: 2
+  },
+  {
+    q: "What was I thinking at this moment?",
+    image: "images/5.jpeg",
+    options: [
+      "She looks beautiful ❤️ ✅",
+      "Let's take more photos",
+      "I'm hungry 😋",
+      "I don't want this moment to end 💕"
+    ],
     answer: 0
   },
   {
-    q: "Which memory is this?",
-    image: "images/2.PNG",
-    options: ["Memory 5", "Memory 6", "Memory 7", "Memory 8"],
+    q: "What is my biggest weakness?",
+    options: ["Overthinking", "You ❤️ ✅", "Sleep", "Food 😋"],
     answer: 1
   },
+
   {
     q: "Which memory is this?",
-    image: "images/3.PNG",
-    options: ["Memory 9", "Memory 10", "Memory 11", "Memory 12"],
-    answer: 2
+    image: "images/2.PNG",
+    options: ["Sringeri", "Hornadu", "Anegudda", "Kollur"],
+    answer: 1
   },
+  
   {
     final: true
   }
@@ -57,26 +87,24 @@ function render() {
 }
 
 function check(i, btn) {
-  // Disable all option buttons
   const buttons = document.querySelectorAll('.opt-btn');
-  buttons.forEach(b => b.disabled = true);
 
   if (i === quiz[current].answer) {
+    // Correct answer: mark, increment score, disable all options and advance
     score++;
     btn.classList.add('correct');
-  } else {
-    btn.classList.add('wrong');
-    // highlight correct answer
-    const buttonsArr = Array.from(buttons);
-    const correctBtn = buttonsArr[quiz[current].answer];
-    if (correctBtn) correctBtn.classList.add('correct');
-  }
+    buttons.forEach(b => b.disabled = true);
 
-  // Move to next question after a short delay so user sees feedback
-  setTimeout(() => {
-    current++;
-    render();
-  }, 800);
+    setTimeout(() => {
+      current++;
+      render();
+    }, 800);
+  } else {
+    // Wrong answer: mark the clicked button and disable it so user can try again
+    btn.classList.add('wrong');
+    btn.disabled = true;
+    // Do NOT reveal the correct answer or advance; user must pick the right one
+  }
 }
 
 function no() {
